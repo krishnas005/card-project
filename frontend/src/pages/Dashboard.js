@@ -13,13 +13,13 @@ function Dashboard() {
     const [newAnswer, setNewAnswer] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:5000/flashcards')
+        axios.get('https://cards-dvgk.onrender.com/flashcards')
             .then(response => setFlashcards(response.data))
             .catch(error => console.error(error));
     }, []);
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/flashcards/${id}`)
+        axios.delete(`https://cards-dvgk.onrender.com/flashcards/${id}`)
             .then(() => {
                 setFlashcards(flashcards.filter(flashcard => flashcard.id !== id));
             })
@@ -34,7 +34,7 @@ function Dashboard() {
     };
 
     const handleUpdate = () => {
-        axios.put(`http://localhost:5000/flashcards/${editId}`, { question: editedQuestion, answer: editedAnswer })
+        axios.put(`https://cards-dvgk.onrender.com/flashcards/${editId}`, { question: editedQuestion, answer: editedAnswer })
             .then(() => {
                 setFlashcards(flashcards.map(card => 
                     card.id === editId ? { ...card, question: editedQuestion, answer: editedAnswer } : card
@@ -47,7 +47,7 @@ function Dashboard() {
     };
 
     const handleAddFlashcard = () => {
-        axios.post('http://localhost:5000/flashcards', { question: newQuestion, answer: newAnswer })
+        axios.post('https://cards-dvgk.onrender.com/flashcards', { question: newQuestion, answer: newAnswer })
             .then(response => {
                 setFlashcards([...flashcards, response.data]);
                 setNewQuestion('');

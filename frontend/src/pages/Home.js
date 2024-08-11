@@ -8,7 +8,7 @@ function Home() {
     const [isFlipped, setIsFlipped] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/flashcards')
+        axios.get('https://cards-dvgk.onrender.com/flashcards')
             .then(response => setFlashcards(response.data))
             .catch(error => console.error(error));
     }, []);
