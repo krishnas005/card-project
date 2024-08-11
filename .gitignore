@@ -1,0 +1,49 @@
+# Node modules for both frontend and backend
+frontend/node_modules/
+backend/node_modules/
+
+# Build output for frontend and backend
+frontend/build/
+frontend/.next/
+backend/dist/
+backend/coverage/
+
+# Environment files
+frontend/.env
+backend/.env
+
+# Logs
+frontend/*.log
+backend/*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor-specific files
+.vscode/
+.idea/
+
+# Dependency directories
+package-lock.json
+yarn.lock
+
+# NPM package cache
+npm-debug.log*
+yarn-error.log*
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Build artifacts
+*.tgz
+
+# Misc
+*.pem
+*.key
+*.crt
+*.p12
+
+# Ignore test files
+frontend/tests/
+backend/tests/
