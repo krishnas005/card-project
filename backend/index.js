@@ -23,6 +23,10 @@ db.connect(err => {
     console.log('Connected to the MySQL server.');
 });
 
+app.get('/', (req, res) => {
+    res.send("Hello World!!" + "Go to /flashcards to view all cards")
+})
+
 // Fetch all flashcards
 app.get('/flashcards', (req, res) => {
     db.query('SELECT * FROM flashcards', (err, results) => {

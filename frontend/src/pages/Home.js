@@ -45,7 +45,7 @@ function Home() {
                 </div>
             ) : (
                 <>
-                    {flashcards.length > 0 && (
+                    {flashcards.length > 0 ? (
                         <div
                             className={`flashcard ${isFlipped ? 'flipped' : ''}`}
                             onClick={flipCard}
@@ -58,6 +58,10 @@ function Home() {
                                     <h3>Answer: {flashcards[currentIndex].answer}</h3>
                                 </div>
                             </div>
+                        </div>
+                    ) : (
+                        <div className="no-flashcards">
+                            <p>No flashcards available. Please add new flashcards in the <a href="/dashboard">Dashboard</a>.</p>
                         </div>
                     )}
                     <div className="buttons">

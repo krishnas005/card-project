@@ -22,6 +22,7 @@ function Dashboard() {
     const [newQuestion, setNewQuestion] = useState('');
     const [newAnswer, setNewAnswer] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [isAdding, setIsAdding] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
@@ -75,6 +76,7 @@ function Dashboard() {
     };
 
     const handleAddFlashcard = () => {
+        setIsAdding(true);
         axios
             .post('https://cards-dvgk.onrender.com/flashcards', {
                 question: newQuestion,
@@ -84,11 +86,13 @@ function Dashboard() {
                 setFlashcards([...flashcards, response.data]);
                 setNewQuestion('');
                 setNewAnswer('');
+                setIsAdding(false);
                 alert('Flashcard added successfully!');
                 window.location.reload();
             })
             .catch((error) => {
                 console.error(error);
+                setIsAdding(false);
                 alert('Failed to add flashcard. Please try again.');
             });
     };
@@ -119,30 +123,38 @@ function Dashboard() {
                     <ClipLoader size={50} color={"#123abc"} loading={isLoading} />
                 </div>
             ) : (
-                <Grid container spacing={2}>
-                    {filteredFlashcards.slice(0, 3).map((flashcard) => (
-                        <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
-                            <Card style={{ minHeight: '120px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                                <CardContent>
-                                    <Typography variant="h6">{flashcard.question}</Typography>
-                                    <Typography variant="body2">{flashcard.answer}</Typography>
-                                    <IconButton
-                                        color="primary"
-                                        onClick={() => handleEdit(flashcard.id)}
-                                    >
-                                        <Edit />
-                                    </IconButton>
-                                    <IconButton
-                                        color="secondary"
-                                        onClick={() => handleDelete(flashcard.id)}
-                                    >
-                                        <Delete />
-                                    </IconButton>
-                                </CardContent>
-                            </Card>
+                <>
+                    {filteredFlashcards.length > 0 ? (
+                        <Grid container spacing={2}>
+                            {filteredFlashcards.slice(0, 3).map((flashcard) => (
+                                <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
+                                    <Card style={{ minHeight: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                        <CardContent>
+                                            <Typography variant="h6">{flashcard.question}</Typography>
+                                            <Typography variant="body2">{flashcard.answer}</Typography>
+                                            <IconButton
+                                                color="primary"
+                                                onClick={() => handleEdit(flashcard.id)}
+                                            >
+                                                <Edit />
+                                            </IconButton>
+                                            <IconButton
+                                                color="secondary"
+                                                onClick={() => handleDelete(flashcard.id)}
+                                            >
+                                                <Delete />
+                                            </IconButton>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            ))}
                         </Grid>
-                    ))}
-                </Grid>
+                    ) : (
+                        <Typography variant="body1" style={{ textAlign: 'center', marginTop: '2rem' }}>
+                            No flashcards available. Please add new flashcards below.
+                        </Typography>
+                    )}
+                </>
             )}
             {editId && (
                 <div style={{ marginTop: '2rem' }}>
@@ -186,8 +198,8 @@ function Dashboard() {
                     onChange={(e) => setNewAnswer(e.target.value)}
                     style={{ marginBottom: '1rem' }}
                 />
-                <Button variant="contained" color="primary" onClick={handleAddFlashcard}>
-                    Add Flashcard
+                <Button variant="contained" color="primary" onClick={handleAddFlashcard} disabled={isAdding}>
+                    {isAdding ? <ClipLoader size={20} color={"#fff"} /> : 'Add Flashcard'}
                 </Button>
             </div>
         </Container>
