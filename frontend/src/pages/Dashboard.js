@@ -29,7 +29,7 @@ function Dashboard() {
         axios
             .get('https://cards-dvgk.onrender.com/flashcards')
             .then((response) => {
-                setFlashcards(response.data);
+                setFlashcards(response.data.reverse());
                 setIsLoading(false);
             })
             .catch((error) => {
@@ -128,7 +128,7 @@ function Dashboard() {
                         <Grid container spacing={2}>
                             {filteredFlashcards.slice(0, 3).map((flashcard) => (
                                 <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
-                                    <Card style={{ minHeight: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                    <Card style={{ minHeight: '180px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                                         <CardContent>
                                             <Typography variant="h6">{flashcard.question}</Typography>
                                             <Typography variant="body2">{flashcard.answer}</Typography>

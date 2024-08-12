@@ -54,6 +54,7 @@
 
 .flashcard-back {
     background-color: #4caf50;
+    font-weight: 100;
     color: white;
     transform: rotateY(180deg);
 }
