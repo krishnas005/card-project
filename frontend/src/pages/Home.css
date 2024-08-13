@@ -19,6 +19,7 @@
     perspective: 1000px;
     margin: 1rem;
     cursor: pointer;
+    transition: width 0.3s, height 0.3s;
 }
 
 .flashcard-inner {
@@ -44,19 +45,21 @@
     justify-content: center;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 0.5rem;
+    text-align: center;
 }
 
 .flashcard-front {
     background-color: #1976d2;
     color: white;
-    font-size: larger;
+    font-size: 1.2rem;
 }
 
 .flashcard-back {
     background-color: #4caf50;
-    font-weight: 100;
     color: white;
     transform: rotateY(180deg);
+    font-size: 1.2rem;
 }
 
 .button {
@@ -92,4 +95,35 @@
     margin-top: 1rem;
     color: #555;
     max-width: 500px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .flashcard {
+        width: 320px;
+        height: 150px;
+    }
+
+    .flashcard-front, .flashcard-back {
+        font-size: 1rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .flashcard {
+        width: 260px;
+        height: 120px;
+    }
+
+    .flashcard-front, .flashcard-back {
+        font-size: 0.9rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
 }
